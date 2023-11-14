@@ -1,0 +1,90 @@
+Notes on use (incomplete), more detailed instructions to be added.
+
+Running
+-------
+
+It is possible to run multiple separate instances by running gui.py multiple times.
+
+
+Loading files
+-------------
+
+Load files and attempt to determine file automatically using "Load files". Load plain text simple tabular data using "Load files (gen.)" and give the required parameters.
+
+
+Image files
+-----------
+
+After loading image files, show gallery by "Plot". Click thumbnail to show full image. Click on image to place measurement lines.
+
+
+Configuration
+-------------
+
+All configuration is defined in the .cfg files (standard ini-format). Edit with a text editor. Note: converter configurations are not updated until reloading the files.
+
+Options that can be toggled are generally "ON" or "OFF".
+
+Do not use quotation marks around strings (such as file paths, for example).
+
+
+Adding converters
+-----------------
+
+Create .py and .cfg files with the same name under "converters" directory. See "tabular.py" and "tabular.cfg" for a template.
+
+In the .cfg file, add PATH-STRING under GENERAL section to create a pattern for automatically detecting the converter from file path. "*" is any character any amount of times, "?" is any character once. Separate multiple path strings by ";".
+
+
+Plotting
+--------
+
+If all legends (size and shape) are not visible, adjust the window size by dragging and plot size using the "Configure subplots" button on the figure window.
+
+
+Plot customizer
+---------------
+
+Separate options using ";" (for example X_RANGE = 0.0;1,0).
+To toggle options, use "ON" or "OFF".
+
+Select saved options using button below "Exit".
+
+"Customize" applies customizations to current figure (change figure from the main gui window).
+
+"Save" saves figure to path defined in config using a timestamped filename.
+
+
+XRD analysis
+------------
+
+max_int_sp = intensity of side peak with max. intensity
+x_arcsec_max_int = arcsec value of max intensity
+integ = integrated
+lin = from linearized intensity data (10-base log of measured intensity)
+
+Define lattice constants for the compressive and tensile materials in config.
+
+
+Gradient analysis
+-----------------
+FR = flux ratio (flux 2 / flux 1) (define options in gradients.cfg). Determined by "x" coordinate extracted from measurement data.
+
+
+
+XRD fitting
+-----------
+
+Run "fit xrd" to run fit for all selected measurements. Make sure PATH_RECORDS_FIT is defined in path config to save results.
+
+To view fitted curves / analysis, reload the files or if necessary restart gui.
+
+Ranges for iterating parameters within fit steps are defined in the fit_xrd method of the fit_xrd module.
+
+Multiprocessing is not yet implemented. However, different set of measurements can be fitted simultaneously by running multiple instances of gui.py
+
+
+Filename processing
+-------------------
+
+Sample parameters for listing and for use in converters are parsed from filenames by the "calc_sample_params.py" module. Add new parameters to the relevant section.
